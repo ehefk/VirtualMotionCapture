@@ -419,6 +419,28 @@ namespace UnityMemoryMappedFile
             public bool ResponderEnable { get; set; } 
         }
 
+        public class GetEnableExternalMotionSender2 { }
+        public class EnableExternalMotionSender2
+        {
+            public bool enable { get; set; }
+        }
+        public class GetExternalMotionSender2Address { }
+        public class ChangeExternalMotionSender2Address
+        {
+            public string address { get; set; }
+            public int port { get; set; }
+
+            public int PeriodStatus { get; set; }
+            public int PeriodRoot { get; set; }
+            public int PeriodBone { get; set; }
+            public int PeriodBlendShape { get; set; }
+            public int PeriodCamera { get; set; }
+            public int PeriodDevices { get; set; }
+
+            public string OptionString { get; set; } //OK
+            public bool ResponderEnable { get; set; }
+        }
+
         public class GetEnableExternalMotionReceiver { }
         public class EnableExternalMotionReceiver
         {

@@ -85,10 +85,10 @@
                         <Button Content="VIVE Pro Eye&#xa; Droolon F1" Name="EyeTracking_ViveProEyeSettingButton" Click="EyeTracking_ViveProEyeSettingButton_Click"/>
                     </UniformGrid>
                 </GroupBox>
-				<GroupBox Header="Lip Tracking (Experimental/Prototype)">
-					<UniformGrid Columns="2">
-						<Button Content="VIVE Lip Tracker" Name="LipTracking_ViveSettingButton" Click="LipTracking_ViveSettingButton_Click"/>
-					</UniformGrid>
+                <GroupBox Header="Lip Tracking (Experimental/Prototype)">
+                    <UniformGrid Columns="2">
+                        <Button Content="VIVE Lip Tracker" Name="LipTracking_ViveSettingButton" Click="LipTracking_ViveSettingButton_Click"/>
+                    </UniformGrid>
                 </GroupBox>
                 <GroupBox Header="{DynamicResource SettingWindow_VMCMod}" Name="VMCModGroupBox">
                     <DockPanel>
@@ -125,15 +125,31 @@
                         <CheckBox Content="{DynamicResource SettingWindow_ExternalMotionSenderEnable}" Name="ExternalMotionSenderEnableCheckBox" Checked="ExternalMotionSenderCheckBox_Changed" Unchecked="ExternalMotionSenderCheckBox_Changed" DockPanel.Dock="Top"/>
                         <Grid DockPanel.Dock="Top">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="6.6"/>
+                                <ColumnDefinition Width="13.4"/>
+                                <ColumnDefinition Width="25.4"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="Address:" Grid.Column="0"/>
-                            <TextBox Text="127.0.0.1" Grid.Column="1" VerticalAlignment="Center" Name="ExternalMotionSenderAddressTextBox"/>
-                            <TextBlock Text=" Port:" Grid.Column="2"/>
-                            <TextBox Text="39539" Grid.Column="3" VerticalAlignment="Center" Name="ExternalMotionSenderPortTextBox"/>
+                            <TextBlock Text="Address:" Grid.Column="0" Grid.ColumnSpan="4" Margin="0,1,79.2,0.6"/>
+                            <TextBox Text="127.0.0.1" Grid.Column="3" VerticalAlignment="Center" Name="ExternalMotionSenderAddressTextBox" Margin="0.4,0,21.2,-0.4"/>
+                            <TextBlock Text=" Port:" Grid.Column="5" Margin="0.8,1,77.8,0.6"/>
+                            <TextBox Text="39539" Grid.Column="3" VerticalAlignment="Center" Name="ExternalMotionSenderPortTextBox" Margin="93.4,0,-0.2,-0.4" Grid.ColumnSpan="3"/>
+                        </Grid>
+                        <CheckBox Content="{DynamicResource SettingWindow_ExternalMotionSender2Enable}" Name="ExternalMotionSender2EnableCheckBox" DockPanel.Dock="Top" Checked="ExternalMotionSender2CheckBox_Changed" Unchecked="ExternalMotionSender2CheckBox_Changed"/>
+                        <Grid DockPanel.Dock="Top">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="20.2"/>
+                                <ColumnDefinition Width="25.4"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Address:" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,1,79.6,0.6"/>
+                            <TextBox Text="192.168.1.99" Grid.Column="2" VerticalAlignment="Center" Name="ExternalMotionSender2AddressTextBox" Margin="0.4,0,19.2,-0.4"/>
+                            <TextBlock Text=" Port:" Grid.Column="3" Grid.ColumnSpan="2" Margin="0.4,1,78.8,0.6"/>
+                            <TextBox Text="39555" Grid.Column="4" VerticalAlignment="Center" Name="ExternalMotionSender2PortTextBox" Margin="0.2,0,-0.2,-0.4"/>
                         </Grid>
                         <GroupBox Header="{DynamicResource SettingWindow_ExternalMotionSenderTransmissionInterval}" DockPanel.Dock="Top">
                             <Grid>
@@ -144,7 +160,7 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="73.6"/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
@@ -170,8 +186,8 @@
                             <TextBlock Text="Option: " Grid.Column="0"/>
                             <TextBox Text="" Grid.Column="1" VerticalAlignment="Center" Name="OptionStringTextbox"/>
                         </Grid>
-						<CheckBox Content="{DynamicResource SettingWindow_ExternalMotionSenderResponderEnable}" Name="ExternalMotionSenderResponderEnableCheckBox" DockPanel.Dock="Top"/>
-					</DockPanel>
+                        <CheckBox Content="{DynamicResource SettingWindow_ExternalMotionSenderResponderEnable}" Name="ExternalMotionSenderResponderEnableCheckBox" DockPanel.Dock="Top"/>
+                    </DockPanel>
                 </GroupBox>
                 <GroupBox>
                     <GroupBox.Header>
@@ -181,7 +197,7 @@
                                 <TextBlock Text=" IP:"/>
                                 <Button Content="Check IP" Name="CheckIPAddressButton" Click="CheckIPAddressButton_Click" Padding="5,0" Margin="5,1" Height="Auto"/>
                             </StackPanel>
-						</WrapPanel>
+                        </WrapPanel>
                     </GroupBox.Header>
                     <DockPanel>
                         <Button Content="{DynamicResource SettingWindow_ResolutionApply}" Name="OSCReceiverApplyButton" Click="OSCReceiverApplyButton_Click" DockPanel.Dock="Right" Padding="10,5"/>

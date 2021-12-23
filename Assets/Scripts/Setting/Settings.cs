@@ -319,6 +319,12 @@ namespace VMC
         [OptionalField]
         public int ExternalMotionSenderPort;
         [OptionalField]
+        public bool ExternalMotionSender2Enable;
+        [OptionalField]
+        public string ExternalMotionSender2Address;
+        [OptionalField]
+        public int ExternalMotionSender2Port;
+        [OptionalField]
         public int ExternalMotionSenderPeriodStatus;
         [OptionalField]
         public int ExternalMotionSenderPeriodRoot;
@@ -333,6 +339,20 @@ namespace VMC
         [OptionalField]
         public bool ExternalMotionSenderResponderEnable;
         [OptionalField]
+        public int ExternalMotionSender2PeriodStatus;
+        [OptionalField]
+        public int ExternalMotionSender2PeriodRoot;
+        [OptionalField]
+        public int ExternalMotionSender2PeriodBone;
+        [OptionalField]
+        public int ExternalMotionSender2PeriodBlendShape;
+        [OptionalField]
+        public int ExternalMotionSender2PeriodCamera;
+        [OptionalField]
+        public int ExternalMotionSender2PeriodDevices;
+        [OptionalField]
+        public bool ExternalMotionSender2ResponderEnable;
+        [OptionalField]
         public bool ExternalMotionReceiverEnable;
         [OptionalField]
         public int ExternalMotionReceiverPort;
@@ -340,6 +360,8 @@ namespace VMC
         public bool ExternalMotionReceiverRequesterEnable;
         [OptionalField]
         public string ExternalMotionSenderOptionString;
+        [OptionalField]
+        public string ExternalMotionSender2OptionString;
         [OptionalField]
         public List<string> MidiCCBlendShape;
         [OptionalField]

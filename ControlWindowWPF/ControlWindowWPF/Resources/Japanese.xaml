@@ -235,6 +235,7 @@
     <system:String x:Key="SettingWindow_ExternalMotionSender">モーション送信(VMCProtocol)</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionSender_Free">モーション送信(VMCProtocol) / VMC Mod</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionSenderEnable">OSCでモーション送信を有効にする</system:String>
+    <system:String x:Key="SettingWindow_ExternalMotionSender2Enable">OSCでモーション送信を有効にする #2</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionSenderTransmissionInterval">送信間隔(指定フレームに1回)</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionReceiver">モーション受信(VMCProtocol)</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionReceiverEnable">OSCでモーション受信を有効にする</system:String>

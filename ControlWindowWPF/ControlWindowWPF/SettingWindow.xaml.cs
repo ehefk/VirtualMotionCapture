@@ -292,6 +292,33 @@ namespace VirtualMotionCaptureControlPanel
                     ExternalMotionSenderResponderEnableCheckBox.IsChecked = data.ResponderEnable;
                 });
             });
+            await Globals.Client?.SendCommandWaitAsync(new PipeCommands.GetEnableExternalMotionSender2 { }, d =>
+            {
+                var data = (PipeCommands.EnableExternalMotionSender2)d;
+                Dispatcher.Invoke(() =>
+                {
+                    isSetting = true;
+                    ExternalMotionSender2EnableCheckBox.IsChecked = data.enable;
+                    isSetting = false;
+                });
+            });
+            await Globals.Client?.SendCommandWaitAsync(new PipeCommands.GetExternalMotionSender2Address { }, d =>
+            {
+                var data = (PipeCommands.ChangeExternalMotionSender2Address)d;
+                Dispatcher.Invoke(() =>
+                {
+                    ExternalMotionSender2AddressTextBox.Text = data.address;
+                    ExternalMotionSender2PortTextBox.Text = data.port.ToString();
+                    PeriodStatusTextBox.Text = data.PeriodStatus.ToString();
+                    PeriodRootTextBox.Text = data.PeriodRoot.ToString();
+                    PeriodBoneTextBox.Text = data.PeriodBone.ToString();
+                    PeriodBlendShapeTextBox.Text = data.PeriodBlendShape.ToString();
+                    PeriodCameraTextBox.Text = data.PeriodCamera.ToString();
+                    PeriodDevicesTextBox.Text = data.PeriodDevices.ToString();
+                    OptionStringTextbox.Text = data.OptionString;
+                    ExternalMotionSenderResponderEnableCheckBox.IsChecked = data.ResponderEnable;
+                });
+            });
             await Globals.Client?.SendCommandWaitAsync(new PipeCommands.GetEnableExternalMotionReceiver { }, d =>
             {
                 var data = (PipeCommands.EnableExternalMotionReceiver)d;
@@ -674,9 +701,20 @@ namespace VirtualMotionCaptureControlPanel
             });
         }
 
+        private async void ExternalMotionSender2CheckBox_Changed(object sender, RoutedEventArgs e)
+        {
+            if (isSetting) return;
+            await Globals.Client?.SendCommandAsync(new PipeCommands.EnableExternalMotionSender2
+            {
+                enable = ExternalMotionSender2EnableCheckBox.IsChecked.Value
+            });
+        }
+
+
         private async void OSCApplyButton_Click(object sender, RoutedEventArgs e)
         {
             var port = TextBoxTryParse(ExternalMotionSenderPortTextBox);
+            var port2 = TextBoxTryParse(ExternalMotionSender2PortTextBox);
             var PeriodStatus = TextBoxTryParse(PeriodStatusTextBox);
             var PeriodRoot = TextBoxTryParse(PeriodRootTextBox);
             var PeriodBone = TextBoxTryParse(PeriodBoneTextBox);
@@ -690,6 +728,24 @@ namespace VirtualMotionCaptureControlPanel
                 {
                     address = ExternalMotionSenderAddressTextBox.Text,
                     port = port.Value,
+                    PeriodStatus = PeriodStatus.Value,
+                    PeriodRoot = PeriodRoot.Value,
+                    PeriodBone = PeriodBone.Value,
+                    PeriodBlendShape = PeriodBlendShape.Value,
+                    PeriodCamera = PeriodCamera.Value,
+                    PeriodDevices = PeriodDevices.Value,
+                    OptionString = OptionStringTextbox.Text,
+                    ResponderEnable = ExternalMotionSenderResponderEnableCheckBox.IsChecked.Value
+                });
+
+            }
+
+            if (port2.HasValue)
+            {
+                await Globals.Client?.SendCommandAsync(new PipeCommands.ChangeExternalMotionSender2Address
+                {
+                    address = ExternalMotionSender2AddressTextBox.Text,
+                    port = port2.Value,
                     PeriodStatus = PeriodStatus.Value,
                     PeriodRoot = PeriodRoot.Value,
                     PeriodBone = PeriodBone.Value,

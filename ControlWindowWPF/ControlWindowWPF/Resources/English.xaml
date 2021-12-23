@@ -234,6 +234,7 @@
     <system:String x:Key="SettingWindow_ExternalMotionSender">VMCProtocol Motion sender</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionSender_Free">VMCProtocol Motion sender / VMC Mod</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionSenderEnable">Enable OSC motion sender</system:String>
+    <system:String x:Key="SettingWindow_ExternalMotionSender2Enable">Enable OSC motion sender #2</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionSenderTransmissionInterval">Interval(once every specified frame)</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionReceiver">VMCProtocol Motion receiver</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionReceiverEnable">Enable OSC motion receiver</system:String>

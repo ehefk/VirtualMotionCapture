@@ -53,6 +53,8 @@ namespace VMC
 
         public GameObject ExternalMotionSenderObject;
         private ExternalSender externalMotionSender;
+        public GameObject ExternalMotionSender2Object;
+        private ExternalSender externalMotionSender2;
 
         public GameObject ExternalMotionReceiverObject;
         private ExternalReceiverForVMC externalMotionReceiver;
@@ -147,6 +149,7 @@ namespace VMC
             Settings.Current.CustomBackgroundColor = BackgroundRenderer.material.color;
 
             externalMotionSender = ExternalMotionSenderObject.GetComponent<ExternalSender>();
+            externalMotionSender2 = ExternalMotionSender2Object.GetComponent<ExternalSender>();
             externalMotionReceiver = ExternalMotionReceiverObject.GetComponent<ExternalReceiverForVMC>();
         }
 
@@ -626,6 +629,40 @@ namespace VMC
                         PeriodDevices = Settings.Current.ExternalMotionSenderPeriodDevices,
                         OptionString = Settings.Current.ExternalMotionSenderOptionString,
                         ResponderEnable = Settings.Current.ExternalMotionSenderResponderEnable
+                    }, e.RequestId);
+                }
+                else if (e.CommandType == typeof(PipeCommands.EnableExternalMotionSender2))
+                {
+                    var d = (PipeCommands.EnableExternalMotionSender2)e.Data;
+                    SetExternalMotionSender2Enable(d.enable);
+                }
+                else if (e.CommandType == typeof(PipeCommands.GetEnableExternalMotionSender2))
+                {
+                    await server.SendCommandAsync(new PipeCommands.EnableExternalMotionSender2
+                    {
+                        enable = Settings.Current.ExternalMotionSender2Enable
+                    }, e.RequestId);
+                }
+                else if (e.CommandType == typeof(PipeCommands.ChangeExternalMotionSender2Address))
+                {
+                    var d = (PipeCommands.ChangeExternalMotionSender2Address)e.Data;
+                    ChangeExternalMotionSender2Address(d.address, d.port, d.PeriodStatus, d.PeriodRoot, d.PeriodBone, d.PeriodBlendShape, d.PeriodCamera, d.PeriodDevices, d.OptionString, d.ResponderEnable);
+
+                }
+                else if (e.CommandType == typeof(PipeCommands.GetExternalMotionSender2Address))
+                {
+                    await server.SendCommandAsync(new PipeCommands.ChangeExternalMotionSender2Address
+                    {
+                        address = Settings.Current.ExternalMotionSender2Address,
+                        port = Settings.Current.ExternalMotionSender2Port,
+                        PeriodStatus = Settings.Current.ExternalMotionSender2PeriodStatus,
+                        PeriodRoot = Settings.Current.ExternalMotionSender2PeriodRoot,
+                        PeriodBone = Settings.Current.ExternalMotionSender2PeriodBone,
+                        PeriodBlendShape = Settings.Current.ExternalMotionSender2PeriodBlendShape,
+                        PeriodCamera = Settings.Current.ExternalMotionSender2PeriodCamera,
+                        PeriodDevices = Settings.Current.ExternalMotionSender2PeriodDevices,
+                        OptionString = Settings.Current.ExternalMotionSender2OptionString,
+                        ResponderEnable = Settings.Current.ExternalMotionSender2ResponderEnable
                     }, e.RequestId);
                 }
                 else if (e.CommandType == typeof(PipeCommands.EnableExternalMotionReceiver))
@@ -2255,6 +2292,18 @@ namespace VMC
             }
         }
 
+        private void SetExternalMotionSender2Enable(bool enable)
+        {
+            if (IsPreRelease == false) return;
+            Settings.Current.ExternalMotionSender2Enable = enable;
+            ExternalMotionSender2Object.SetActive(enable);
+            if (CurrentModel != null)
+            {
+                WaitOneFrameAction(() => VMCEvents.OnModelLoaded?.Invoke(CurrentModel));
+                WaitOneFrameAction(() => VMCEvents.OnCameraChanged?.Invoke(CameraManager.Current.ControlCamera));
+            }
+        }
+
         private void SetExternalMotionReceiverEnable(bool enable)
         {
             Settings.Current.ExternalMotionReceiverEnable = enable;
@@ -2302,6 +2351,38 @@ namespace VMC
             Settings.Current.ExternalMotionSenderPort = port;
 
             externalMotionSender.ChangeOSCAddress(address, port);
+        }
+
+        private void ChangeExternalMotionSender2Address(string address, int port, int pstatus, int proot, int pbone, int pblendshape, int pcamera, int pdevices, string optionstring, bool responderEnable)
+        {
+            Settings.Current.ExternalMotionSender2Address = address;
+            Settings.Current.ExternalMotionSender2Port = port;
+            Settings.Current.ExternalMotionSender2PeriodStatus = pstatus;
+            Settings.Current.ExternalMotionSender2PeriodRoot = proot;
+            Settings.Current.ExternalMotionSender2PeriodBone = pbone;
+            Settings.Current.ExternalMotionSender2PeriodBlendShape = pblendshape;
+            Settings.Current.ExternalMotionSender2PeriodCamera = pcamera;
+            Settings.Current.ExternalMotionSender2PeriodDevices = pdevices;
+            Settings.Current.ExternalMotionSender2OptionString = optionstring;
+            Settings.Current.ExternalMotionSender2ResponderEnable = responderEnable;
+
+            externalMotionSender2.periodStatus = pstatus;
+            externalMotionSender2.periodRoot = proot;
+            externalMotionSender2.periodBone = pbone;
+            externalMotionSender2.periodBlendShape = pblendshape;
+            externalMotionSender2.periodCamera = pcamera;
+            externalMotionSender2.periodDevices = pdevices;
+            externalMotionSender2.ChangeOSCAddress(address, port);
+            externalMotionSender2.optionString = optionstring;
+            easyDeviceDiscoveryProtocolManager.responderEnable = responderEnable;
+        }
+
+        public void ChangeExternalMotionSender2Address(string address, int port)
+        {
+            Settings.Current.ExternalMotionSender2Address = address;
+            Settings.Current.ExternalMotionSender2Port = port;
+
+            externalMotionSender2.ChangeOSCAddress(address, port);
         }
 
         private void ChangeExternalMotionReceiverPort(int port, bool requesterEnable)
@@ -2688,6 +2769,9 @@ namespace VMC
 
             SetExternalMotionSenderEnable(Settings.Current.ExternalMotionSenderEnable);
             ChangeExternalMotionSenderAddress(Settings.Current.ExternalMotionSenderAddress, Settings.Current.ExternalMotionSenderPort, Settings.Current.ExternalMotionSenderPeriodStatus, Settings.Current.ExternalMotionSenderPeriodRoot, Settings.Current.ExternalMotionSenderPeriodBone, Settings.Current.ExternalMotionSenderPeriodBlendShape, Settings.Current.ExternalMotionSenderPeriodCamera, Settings.Current.ExternalMotionSenderPeriodDevices, Settings.Current.ExternalMotionSenderOptionString, Settings.Current.ExternalMotionSenderResponderEnable);
+            
+            SetExternalMotionSender2Enable(Settings.Current.ExternalMotionSender2Enable);
+            ChangeExternalMotionSender2Address(Settings.Current.ExternalMotionSender2Address, Settings.Current.ExternalMotionSender2Port, Settings.Current.ExternalMotionSender2PeriodStatus, Settings.Current.ExternalMotionSender2PeriodRoot, Settings.Current.ExternalMotionSender2PeriodBone, Settings.Current.ExternalMotionSender2PeriodBlendShape, Settings.Current.ExternalMotionSender2PeriodCamera, Settings.Current.ExternalMotionSender2PeriodDevices, Settings.Current.ExternalMotionSender2OptionString, Settings.Current.ExternalMotionSender2ResponderEnable);
 
             ChangeExternalMotionReceiverPort(Settings.Current.ExternalMotionReceiverPort, Settings.Current.ExternalMotionReceiverRequesterEnable);
             SetExternalMotionReceiverEnable(Settings.Current.ExternalMotionReceiverEnable);

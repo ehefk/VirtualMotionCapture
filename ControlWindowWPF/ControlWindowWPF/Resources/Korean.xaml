@@ -235,6 +235,7 @@
     <system:String x:Key="SettingWindow_ExternalMotionSender">외부로 모션을 송신(VMCProtocol)</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionSender_Free">외부로 모션을 송신(VMCProtocol) / VMC Mod</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionSenderEnable">OSC로 모션송신을 활성화합니다</system:String>
+    <system:String x:Key="SettingWindow_ExternalMotionSender2Enable">OSC로 모션송신을 활성화합니다 #2</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionSenderTransmissionInterval">전송 간격 (지정 프레임에 1 회)</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionReceiver">외부에서 모션 수신(VMCProtocol)</system:String>
     <system:String x:Key="SettingWindow_ExternalMotionReceiverEnable">OSC에서 모션의 수신을 활성화합니다</system:String>
